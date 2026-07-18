@@ -1,0 +1,134 @@
+@use "variables" as *;
+@use "mixins" as *;
+
+.hero {
+  padding-block: $space-8 $space-8;
+  @include hairline(bottom);
+
+  @include from($bp-md) {
+    padding-block: $space-9 $space-9;
+  }
+}
+
+.inner {
+  @include container;
+}
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-2;
+  margin-bottom: $space-6;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--muted);
+}
+
+.title {
+  font-size: clamp(2.8rem, 12vw, 7.5rem);
+  font-weight: 400;
+  line-height: 0.96;
+  letter-spacing: -0.025em;
+}
+
+.line {
+  display: block;
+}
+
+.title em {
+  font-style: italic;
+  color: var(--faint);
+}
+
+.intro {
+  margin-top: $space-6;
+  max-width: 42ch;
+  font-family: $font-sans;
+  font-size: clamp(1.05rem, 2.4vw, 1.3rem);
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: $space-5;
+  margin-top: $space-7;
+  font-family: $font-sans;
+}
+
+.cta {
+  padding: $space-3 $space-5;
+  font-size: 0.95rem;
+  font-weight: 500;
+  border: 1px solid var(--foreground);
+  border-radius: $radius-sm;
+  transition: background $transition-base, color $transition-base;
+
+  &:hover {
+    background: var(--foreground);
+    color: var(--background);
+  }
+}
+
+.link {
+  position: relative;
+  font-size: 0.95rem;
+  color: var(--muted);
+  transition: color $transition-base;
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+    width: 100%;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform $transition-base;
+  }
+
+  &:hover {
+    color: var(--foreground);
+
+    &::after {
+      transform: scaleX(1);
+    }
+  }
+}
+
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-6 $space-8;
+  margin-top: $space-9;
+  padding-top: $space-6;
+  @include hairline(top);
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: $space-1;
+}
+
+.statValue {
+  font-family: $font-serif;
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: 400;
+  line-height: 1;
+}
+
+.statLabel {
+  font-family: $font-sans;
+  font-size: 0.85rem;
+  color: var(--muted);
+}

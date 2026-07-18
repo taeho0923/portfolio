@@ -1,0 +1,165 @@
+@use "variables" as *;
+@use "mixins" as *;
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: $z-header;
+  height: $header-height;
+  background: color-mix(in oklab, var(--background) 82%, transparent);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid transparent;
+  transition: border-color $transition-base, background $transition-base;
+
+  &[data-scrolled="true"] {
+    border-bottom-color: var(--line);
+  }
+}
+
+.inner {
+  @include container;
+  @include flex(space-between, center);
+  height: 100%;
+}
+
+.logo {
+  font-family: $font-serif;
+  font-size: 1.35rem;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+.nav {
+  @include until($bp-md) {
+    position: fixed;
+    inset: $header-height 0 auto 0;
+  }
+}
+
+.navList {
+  @include flex(center, center, $space-6);
+
+  @include until($bp-md) {
+    flex-direction: column;
+    gap: 0;
+    padding: $space-2 $container-pad $space-5;
+    background: var(--background);
+    @include hairline(bottom);
+
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transition: max-height $transition-base, opacity $transition-base;
+
+    &[data-open="true"] {
+      max-height: 360px;
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    li {
+      width: 100%;
+    }
+  }
+}
+
+.navLink {
+  position: relative;
+  font-family: $font-sans;
+  font-size: 0.9rem;
+  color: var(--muted);
+  transition: color $transition-base;
+
+  &:hover {
+    color: var(--foreground);
+  }
+
+  // 데스크탑: 넘버 숨기고 밑줄 인디케이터
+  @include from($bp-md) {
+    .navIndex {
+      display: none;
+    }
+    &::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -6px;
+      width: 0;
+      height: 1px;
+      background: var(--foreground);
+      transition: width $transition-base;
+    }
+    &:hover::after {
+      width: 100%;
+    }
+  }
+
+  // 모바일: 넘버링 리스트
+  @include until($bp-md) {
+    display: flex;
+    align-items: baseline;
+    gap: $space-3;
+    padding: $space-3 0;
+    font-size: 1.15rem;
+    @include hairline(top);
+  }
+}
+
+.navIndex {
+  font-family: $font-mono;
+  font-size: 0.75rem;
+  color: var(--faint);
+}
+
+.actions {
+  @include flex(flex-end, center, $space-3);
+}
+
+.menuBtn {
+  display: none;
+  width: 40px;
+  height: 40px;
+  border-radius: $radius-sm;
+  border: 1px solid var(--border);
+
+  @include until($bp-md) {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  span,
+  span::before,
+  span::after {
+    content: "";
+    display: block;
+    width: 18px;
+    height: 1.5px;
+    background: var(--foreground);
+    transition: transform $transition-base, opacity $transition-base;
+  }
+
+  span {
+    position: relative;
+
+    &::before {
+      position: absolute;
+      top: -6px;
+    }
+    &::after {
+      position: absolute;
+      top: 6px;
+    }
+
+    &[data-open="true"] {
+      background: transparent;
+      &::before {
+        transform: translateY(6px) rotate(45deg);
+      }
+      &::after {
+        transform: translateY(-6px) rotate(-45deg);
+      }
+    }
+  }
+}

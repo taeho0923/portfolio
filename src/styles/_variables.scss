@@ -1,0 +1,48 @@
+// ============================================================
+// 디자인 토큰 (정적 값) — 색상은 globals.scss의 CSS 변수로 관리
+// ============================================================
+
+// ---------- 브레이크포인트 ----------
+$bp-sm: 480px;
+$bp-md: 768px;
+$bp-lg: 1024px;
+$bp-xl: 1280px;
+
+// ---------- 레이아웃 ----------
+$container-max: 1120px;
+$container-pad: 24px;
+$header-height: 68px;
+
+// ---------- 간격 스케일 (8px 기반) ----------
+$space-1: 4px;
+$space-2: 8px;
+$space-3: 12px;
+$space-4: 16px;
+$space-5: 24px;
+$space-6: 32px;
+$space-7: 48px;
+$space-8: 64px;
+$space-9: 96px;
+$space-10: 128px;
+
+// ---------- 라운드 ----------
+$radius-sm: 8px;
+$radius-md: 12px;
+$radius-lg: 20px;
+$radius-full: 999px;
+
+// ---------- 타이포 ----------
+$font-sans: var(--font-geist-sans), "Apple SD Gothic Neo", "Malgun Gothic",
+  "Pretendard", system-ui, sans-serif;
+$font-mono: var(--font-geist-mono), ui-monospace, "SFMono-Regular", monospace;
+// 에디토리얼 세리프 (헤드라인) — 한글은 시스템 명조로 폴백
+$font-serif: var(--font-serif), "Nanum Myeongjo", "AppleMyungjo", Georgia,
+  "Times New Roman", serif;
+
+// ---------- 트랜지션 ----------
+$transition-base: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+$transition-slow: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+// ---------- z-index ----------
+$z-header: 100;
+$z-modal: 200;

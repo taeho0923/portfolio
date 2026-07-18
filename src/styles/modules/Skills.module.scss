@@ -1,0 +1,77 @@
+@use "variables" as *;
+@use "mixins" as *;
+
+.skills {
+  padding-block: $space-9;
+  @include hairline(bottom);
+}
+
+.inner {
+  @include container;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  display: grid;
+  gap: $space-4;
+  padding-block: $space-6;
+  @include hairline(top);
+
+  @include from($bp-lg) {
+    grid-template-columns: 1fr 1.15fr;
+    gap: $space-7;
+    align-items: start;
+  }
+}
+
+.head {
+  display: flex;
+  gap: $space-4;
+}
+
+.num {
+  padding-top: 0.5em;
+  font-family: $font-mono;
+  font-size: 0.8rem;
+  color: var(--faint);
+}
+
+.category {
+  font-size: clamp(1.4rem, 3vw, 1.9rem);
+  font-weight: 400;
+}
+
+.desc {
+  margin-top: $space-2;
+  font-family: $font-sans;
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-2;
+  align-content: flex-start;
+  font-family: $font-sans;
+}
+
+.tag {
+  padding: $space-2 $space-3;
+  font-size: 0.85rem;
+  color: var(--foreground);
+  border: 1px solid var(--border);
+  border-radius: $radius-full;
+  transition: background $transition-base, color $transition-base,
+    border-color $transition-base;
+
+  &:hover {
+    background: var(--foreground);
+    color: var(--background);
+    border-color: var(--foreground);
+  }
+}

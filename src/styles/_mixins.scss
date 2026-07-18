@@ -1,0 +1,80 @@
+@use "variables" as *;
+
+// ============================================================
+// 믹스인
+// ============================================================
+
+// ---------- 반응형: 지정 폭 "이상" (모바일 퍼스트) ----------
+@mixin from($bp) {
+  @media (min-width: $bp) {
+    @content;
+  }
+}
+
+// ---------- 반응형: 지정 폭 "이하" ----------
+@mixin until($bp) {
+  @media (max-width: ($bp - 1px)) {
+    @content;
+  }
+}
+
+// ---------- 중앙 정렬 컨테이너 ----------
+@mixin container {
+  width: 100%;
+  max-width: $container-max;
+  margin-inline: auto;
+  padding-inline: $container-pad;
+
+  @include from($bp-md) {
+    padding-inline: $space-6;
+  }
+}
+
+// ---------- 플렉스 유틸 ----------
+@mixin flex($justify: flex-start, $align: center, $gap: 0) {
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;
+  @if $gap != 0 {
+    gap: $gap;
+  }
+}
+
+// ---------- 스크린리더 전용 (접근성) ----------
+@mixin visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+// ---------- 포커스 링 (키보드 접근성) ----------
+@mixin focus-ring {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: $radius-sm;
+}
+
+// ---------- hairline 구분선 ----------
+@mixin hairline($side: bottom) {
+  border-#{$side}: 1px solid var(--line);
+}
+
+// ---------- 카드 그리드 (반응형 1 → 2 → 3열) ----------
+@mixin card-grid {
+  display: grid;
+  gap: $space-4;
+  grid-template-columns: 1fr;
+
+  @include from($bp-md) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @include from($bp-lg) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

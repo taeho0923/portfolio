@@ -1,0 +1,137 @@
+@use "variables" as *;
+@use "mixins" as *;
+
+// ============================================================
+// 색상 토큰 — 라이트 (웜 페이퍼 톤, 거의 무채색)
+// ============================================================
+:root {
+  --background: #fbfbf9;
+  --surface: #f4f3ef;
+  --surface-2: #eae9e3;
+  --foreground: #1a1917;
+  --muted: #6f6d64;
+  --faint: #9a978c;
+  --border: #dedcd3;
+  --line: #cbc9be;
+
+  // accent = 잉크색 자체 (무채색). 색이 아니라 대비로 승부.
+  --accent: #1a1917;
+  --accent-soft: #f4f3ef;
+}
+
+// ============================================================
+// 색상 토큰 — 다크 (웜 잉크 톤)
+// ============================================================
+.dark {
+  --background: #100f0d;
+  --surface: #171613;
+  --surface-2: #201f1a;
+  --foreground: #f1efe8;
+  --muted: #928f84;
+  --faint: #6b6960;
+  --border: #2a2925;
+  --line: #35342e;
+
+  --accent: #f1efe8;
+  --accent-soft: #1b1a16;
+}
+
+// ============================================================
+// 리셋
+// ============================================================
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: $header-height + $space-4;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: $font-sans;
+  font-size: 16px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  transition: background-color $transition-base, color $transition-base;
+}
+
+main {
+  flex: 1;
+}
+
+// 헤드라인은 세리프 디스플레이
+h1,
+h2,
+h3 {
+  font-family: $font-serif;
+  font-weight: 500;
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+}
+
+h4 {
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img,
+picture,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: inherit;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+::selection {
+  background: var(--foreground);
+  color: var(--background);
+}
+
+:focus-visible {
+  @include focus-ring;
+}
+
+// 모션 최소화 선호 존중 (접근성)
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

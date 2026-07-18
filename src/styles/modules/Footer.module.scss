@@ -1,0 +1,35 @@
+@use "variables" as *;
+@use "mixins" as *;
+
+.footer {
+  padding-block: $space-6;
+  @include hairline(top);
+}
+
+.inner {
+  @include container;
+  @include flex(space-between, center, $space-4);
+  flex-wrap: wrap;
+}
+
+.name {
+  font-family: $font-serif;
+  font-size: 1.15rem;
+}
+
+.copy {
+  font-family: $font-sans;
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+.top {
+  font-family: $font-sans;
+  font-size: 0.82rem;
+  color: var(--muted);
+  transition: color $transition-base;
+
+  &:hover {
+    color: var(--foreground);
+  }
+}
